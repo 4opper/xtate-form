@@ -1,10 +1,10 @@
 import './App.css';
-import { FieldExample } from './FieldExample'
+import { Example } from './Example'
 
 function App() {
   return (
     <div className="App">
-      <FieldExample />
+      <Example />
     </div>
   )
 }
