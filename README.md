@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+// TODO добавить скрин визуализатора и с async и без
+// add API description
+### Реализованно
+- синхронная валидация одного поля
+- асинхронная валидация одного поля
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Реализация
+Statechart имеет 5 состояний:
+- notValidated - начальное состояние. Так же переход в это состояние происходит после вызова метода `set`
+- validating - состояние когда валидация в процессе. Переход в это состояние происходит после вызова метода `validate` 
+  Если есть асинхронные валидации, statechart будет в состоянии validating пока не завершатся все асинхронные операции.
+  Если асинхронных валидаций нет, то запустив все синхронные валидации statechart перейдет в состояние valid или invalid
+- valid - состояние если значение валидное - попадаем сюда если все валидации вернули `true`
+- invalid - состояние если значение не валидное - попадаем сюда если хотя бы одна валидация вернула `false`
+- requestError - состояние ошибки асинхронной операции. Это состояние возможно только если есть хотя бы одна асинхронная валидация
 
-## Available Scripts
+### Почему выбрано такое API
+- простота реализации
+- требует достаточно маленький конфиг от пользователя  
+- пользователь имеет контроль когда запускать валидацию
+- юзеру предоставляются set и validate методы, что лишает юзера необходимости знать о названиях событий   
+- запрос и проверка разделены на два отдельных поля, что способствует loose coupling
+- если нет async валидаций, то все валидации будут выполнены синхронно
 
-In the project directory, you can run:
+### Недостатки и ограничения
+- отдельный statechart для каждого поля
+- не предусмотрено расширение функциональности для валидаций на уровне формы
+- если есть хотя бы одна async валидация, то все проверки будут вызванный асинхронно
+- у пользователя нет доступа к методу send statechart'а
+- если любая из асинхронных операций закончится ошибкой, то statechart перейдет в состояние requestError без указания какая именно операция закончилась ошибкой
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Альретранивные варианты
+1) один statechart для всей формы. Преимущества:
+- более user friendly API
+- возможность расширить функциональность без кардинальных изменений внешнего API библиотеки

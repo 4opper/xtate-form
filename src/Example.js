@@ -17,30 +17,9 @@ const emailConfig = {
         request: (email) => new Promise((resolve, reject) => {
           setTimeout(() => resolve('3'), 200)
         }),
-        validator: (response) => response === '3',
+        validator: (response) => response === '43',
       }
   ],
-  // validations: [
-  //   {
-  //     name: 'check1',
-  //     // request: (email) => 41,
-  //     validator: (email) => email === "qaz",
-  //   },
-  //   {
-  //     name: 'check2',
-  //     request: (email) => new Promise(resolve => {
-  //       setTimeout(() => resolve('2'), 100)
-  //     }),
-  //     validator: (response) => Boolean(response),
-  //   },
-  //   {
-  //     name: 'check3',
-  //     request: (email) => new Promise((resolve, reject) => {
-  //       setTimeout(() => resolve('3'), 200)
-  //     }),
-  //     validator: (response) => Boolean(response),
-  //   }
-  // ],
 }
 
 export function Example() {
