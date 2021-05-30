@@ -1,4 +1,4 @@
-import { useFormMachine } from '../lib/useFormMachine'
+import { useFormMachine } from '../lib'
 
 const formConfig = {
   id: 'formMachineTest',
@@ -14,7 +14,6 @@ const formConfig = {
             setTimeout(() => resolve(email), 200)
           }),
           validator: (email) => {
-            console.log("email lengthCheck's validator" , email)
             console.log("lengthCheck's validator called")
             return email.length !== 0
           },
@@ -63,10 +62,6 @@ export function FormMultipleFieldsCombined() {
     validate()
     console.log("after validate is called")
   }
-  console.log("formState: ", formState)
-  console.log("current state: ", JSON.stringify(formState.value))
-  console.log("context: ", JSON.stringify(formState.context))
-  console.log("===")
 
   return (
     <form>

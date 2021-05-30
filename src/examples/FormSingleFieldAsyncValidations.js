@@ -1,4 +1,4 @@
-import { useFormMachine } from '../lib/useFormMachine'
+import { useFormMachine } from '../lib'
 
 const formConfig = {
   id: 'formMachineTest',
@@ -42,10 +42,6 @@ export function FormSingleFieldAsyncValidations () {
     validate()
     console.log("after validate is called")
   }
-  console.log("formState: ", formState)
-  console.log("current state: ", JSON.stringify(formState.value))
-  console.log("context: ", JSON.stringify(formState.context))
-  console.log("===")
 
   return (
     <form>
