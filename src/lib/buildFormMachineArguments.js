@@ -106,7 +106,6 @@ function prepareValidatingState({ name, validations, hasAsyncValidation }) {
         ...validations.map((validation, index) => ({
           target: `invalid.${validation.name}`,
           cond: (context, event) => {
-            debugger
             const result = !validation.validator(event.data[index])
             return result
           },

@@ -5,6 +5,7 @@ import { FormMultipleFieldsSync } from './examples/FormMultipleFieldsSync'
 import { FormSingleFieldAsyncValidations } from './examples/FormSingleFieldAsyncValidations'
 import { FormSingleFieldCombinedValidations } from './examples/FormSingleFieldCombinedValidations'
 import { FormMultipleFieldsCombined } from './examples/FormMultipleFieldsCombined'
+import { FormMultipleFieldsCombinedWithReset } from './examples/FormMultipleFieldsCombinedWithReset'
 
 const EXAMPLES_MAP = {
   FORM_SINGLE_SYNC: 'FORM_SINGLE_SYNC',
@@ -12,6 +13,7 @@ const EXAMPLES_MAP = {
   FORM_SINGLE_COMBINED: 'FORM_SINGLE_COMBINED',
   FORM_MULTIPLE_SYNC: 'FORM_MULTIPLE_SYNC',
   FORM_MULTIPLE_COMBINED: 'FORM_MULTIPLE_COMBINED',
+  FORM_MULTIPLE_COMBINED_WITH_RESET: 'FORM_MULTIPLE_COMBINED_WITH_RESET',
 }
 
 const COMPONENTS_MAP = {
@@ -20,6 +22,7 @@ const COMPONENTS_MAP = {
   [EXAMPLES_MAP.FORM_SINGLE_COMBINED]: FormSingleFieldCombinedValidations,
   [EXAMPLES_MAP.FORM_MULTIPLE_SYNC]: FormMultipleFieldsSync,
   [EXAMPLES_MAP.FORM_MULTIPLE_COMBINED]: FormMultipleFieldsCombined,
+  [EXAMPLES_MAP.FORM_MULTIPLE_COMBINED_WITH_RESET]: FormMultipleFieldsCombinedWithReset,
 }
 
 function App() {
@@ -34,6 +37,7 @@ function App() {
         <button onClick={() => setExample(EXAMPLES_MAP.FORM_SINGLE_COMBINED)}>Form with single field with combined validations</button>
         <button onClick={() => setExample(EXAMPLES_MAP.FORM_MULTIPLE_SYNC)}>Form with multiple fields with only sync validations</button>
         <button onClick={() => setExample(EXAMPLES_MAP.FORM_MULTIPLE_COMBINED)}>Form with multiple fields with combined validations</button>
+        <button onClick={() => setExample(EXAMPLES_MAP.FORM_MULTIPLE_COMBINED_WITH_RESET)}>Form with multiple fields with combined validations with reset</button>
       </div>
       <div>
         <Example />

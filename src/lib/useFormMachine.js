@@ -12,6 +12,9 @@ export function useFormMachine(formConfig) {
   const validate = useCallback(() => dispatch({
     type: 'VALIDATE',
   }), [dispatch])
+  const reset = useCallback(() => dispatch({
+    type: 'RESET',
+  }), [dispatch])
   const set = useCallback((fieldsMap) => {
     if (typeof fieldsMap !== 'object' || fieldsMap === null) {
       throw new Error('Wrong argument, argument should have shape { fieldName1: value1, fieldName2: value2, etc }')
@@ -23,6 +26,7 @@ export function useFormMachine(formConfig) {
     {
       validate,
       set,
+      reset,
     }
   ]
 }

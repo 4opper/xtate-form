@@ -5,10 +5,14 @@ const formConfig = {
   fields: [
     {
       name: 'email',
-      defaultValue: '',
+      defaultValue: 'default@email.com',
       validations: [
         {
           name: 'lengthCheck',
+          request: (email) => new Promise((resolve) => {
+            console.log("asyncLengthCheck's request called")
+            setTimeout(() => resolve(email), 200)
+          }),
           validator: (email) => {
             console.log("lengthCheck's validator called")
             return email.length !== 0
@@ -25,10 +29,14 @@ const formConfig = {
     },
     {
       name: 'password',
-      defaultValue: '',
+      defaultValue: 'defaultPassword',
       validations: [
         {
           name: 'lengthCheck',
+          request: (password) => new Promise((resolve) => {
+            console.log("asyncLengthCheck's request called")
+            setTimeout(() => resolve(password), 200)
+          }),
           validator: (password) => {
             console.log("lengthCheck's validator called")
             return password.length >= 5
@@ -46,18 +54,23 @@ const formConfig = {
   ]
 }
 
-export function FormMultipleFieldsSync () {
-  const [formState, { validate, set }] = useFormMachine(formConfig)
+export function FormMultipleFieldsCombinedWithReset() {
+  const [formState, { validate, set, reset }] = useFormMachine(formConfig)
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("before validate is called")
     validate()
     console.log("after validate is called")
   }
+  const handleReset = (e) => {
+    e.preventDefault()
+    reset()
+  }
 
   return (
     <form>
       <div>Multiple fields</div>
+      <button onClick={handleReset}>RESET</button>
       <div>
         <input
           type="text"

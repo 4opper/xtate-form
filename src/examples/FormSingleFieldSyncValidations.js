@@ -44,6 +44,7 @@ export function FormSingleFieldSyncValidations () {
           name="test"
           placeholder="Email"
           className={`${formState.matches('invalid') && 'input-invalid'} ${formState.matches('valid') && 'input-valid'}`}
+          value={formState.context.email}
           onChange={(e) => set({ email: e.target.value })}
         />
         {formState.matches('email.invalid.lengthCheck') && <div className="input-error">lengthCheck failed</div>}

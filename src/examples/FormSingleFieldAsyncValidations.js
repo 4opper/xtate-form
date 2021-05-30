@@ -52,6 +52,7 @@ export function FormSingleFieldAsyncValidations () {
           name="test"
           placeholder="Email"
           className={`${formState.matches('invalid') && 'input-invalid'} ${formState.matches('valid') && 'input-valid'}`}
+          value={formState.context.email}
           onChange={(e) => set({ email: e.target.value })}
         />
         {formState.matches('requestError') && <div className="input-error">Something went wrong, try again</div>}
